@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from .env import Database
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,10 +37,19 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites', # added myself for dnago.allauth
+    'allauth', # added myself for dnago.allauth
+    'allauth.account', # added myself for dnago.allauth
+    'allauth.socialaccount', # added myself for dnago.allauth
     'django.contrib.staticfiles',
     'django_summernote',
     'blog_app',
 ]
+ # ---------------------------- added myself for dnago.allauth
+SITE_ID = 1 
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+ # ---------------------------- added myself for dnago.allauth
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -79,15 +89,15 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': 'blog_app',
+        'NAME': f'{Database.get_name()}',
 
-        'USER': 'workoutapp',
+        'USER': f'{Database.get_user_name()}',
 
-        'PASSWORD': 'w2r4k2t3!',
+        'PASSWORD': f'{Database.get_password()}',
 
-        'HOST': '212.227.155.64',
+        'HOST': f'{Database.get_host()}',
 
-        'PORT': '5432',
+        'PORT': f'{Database.get_port()}',
     }
 }
 
@@ -110,6 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
