@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'allauth.account', # added myself for dnago.allauth
     'allauth.socialaccount', # added myself for dnago.allauth
     'django.contrib.staticfiles',
+    'crispy_forms', # added myself
     'django_summernote',
     'blog_app',
 ]
@@ -50,6 +51,7 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
  # ---------------------------- added myself for dnago.allauth
+CRISPY_TEMPLATE_PACK = 'bootstrap4' # added myself fro cripsy forms
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -66,7 +68,7 @@ ROOT_URLCONF = 'blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -140,6 +142,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",    
+]
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
